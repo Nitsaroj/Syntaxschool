@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class=" p-6 rounded shadow">
+  <section class="cate_header">
+    <div class="content">
+      <h2 class="md:text-[130px] text-6xl">CATEGORY</h2>
+      <h2 class="md:text-[130px] text-6xl">CATEGORY</h2>
+    </div>
+    <p class="text-center p-10 text-3xl absolute top-20">Your Interests, Your Way</p>
+  </section>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+    {% for category in categories %}
+    <div class="p-5 rounded border border-blue-950 flex flex-col justify-between">
+      <h3 class="text-xl font-semibold uppercase pb-5">{{ category.name }}</h3>
+      <p>{{ category.description }}</p>
+      <a href="{% url 'topic' category.name %}" class="p-2 mt-6 bg-blue-600 w-[120px] text-center rounded text-white">View Topics</a>
+    </div>
+    {% empty %}
+    <p class="text-3xl">Categories are not Available</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

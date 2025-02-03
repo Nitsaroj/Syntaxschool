@@ -1,0 +1,83 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>{% block title %}Syntax School{% endblock%}</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta rel="icon" href="icon.png" type="image/png">
+	{% tailwind_css %}
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/edit/closetag.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/edit/closebrackets.min.js"></script>
+</head>
+
+<body class="dark:bg-black  dark:text-white">
+
+	<!-- Loader Wrapper -->
+	<div id="loader" class="flex items-center justify-center w-screen h-full bg-white fixed top-0 left-0 z-50">
+		<!-- Loading Animation -->
+		<dotlottie-player src="https://lottie.host/5c21e302-c59f-44e8-bebd-c8cd75095a9a/hWe72pzvkD.lottie"
+			background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
+	</div>
+
+
+
+	{% include 'navbar.html' %}
+
+	<div id="full-screen-search"
+		class="fixed inset-0 bg-bgcolor z-10 flex items-center justify-center opacity-0 invisible transition-all duration-300">
+		<input type="text" placeholder="Search..."
+			class="w-3/4 sm:w-1/2 p-3 rounded-md text-lg border-2 border-white bg-gray-900 text-white focus:outline-none mb-4">
+		<button
+			class="relative bottom-2 left-2 px-3 py-4 md:px-6 md:py-2 bg-black hover:bg-gray-800 text-white rounded-md text-lg">
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white md:h-10 md:w-10" fill="none"
+				viewBox="0 0 24 24" stroke="currentColor">
+				<circle cx="11" cy="11" r="7" stroke-width="2"></circle>
+				<line x1="16" y1="16" x2="21" y2="21" stroke-width="2"></line>
+			</svg>
+		</button>
+		<br>
+		<button id="close-btn"
+			class=" absolute bottom-48 px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md text-lg">
+			Close
+		</button>
+	</div>
+	{% if messages %}
+	{% for message in messages %}
+	{% if message.tags == 'error' %}
+	<center>
+		<h4 class="text-red-600">{{message}}</h4>
+	</center>
+	{% else %}
+	<center>
+		<h4 class="text-blue-500">{{message}}</h4>
+	</center>
+	{% endif %}
+	{% endfor %}
+	{% endif %}
+	{% block content %}
+
+
+	{% endblock%}
+	{% include 'footer.html' %}
+
+
+	<script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+	<script src="{% static 'js/navbar.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+	<script src="{% static 'js/compiler.js' %}"></script>
+	<script src="{% static 'js/lesson.js' %}"></script>
+
+
+
+</body>
+
+</html>

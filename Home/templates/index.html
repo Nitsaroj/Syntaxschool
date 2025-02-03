@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home
+{% endblock%}
+
+{% block content %}
+
+<section class="flex flex-col md:flex-row items-center justify-center px-6 h-[100vh]">
+
+    <div class="md:w-1/2 md:text-center w-full flex flex-col justify-center ">
+        <h1 class="text-3xl md:text-6xl font-bold text-center">
+            Empowering Learning, <br> Anywhere, Anytime!
+        </h1>
+        <p class="text-text text-sm p-6 text-center">Enjoy our free tutorials, covering all aspects of web
+            development and programming.</p>
+        <br>
+        <label for="" class="text-center">
+            <a href="{% url 'category' %}" class="bg-button text-white px-14 py-3 rounded hover:bg-bgcolor ">Let's
+                Start</a>
+        </label>
+
+    </div>
+
+    <div class="md:w-1/2 md:mt-0 flex justify-center">
+        <dotlottie-player src="https://lottie.host/1256fcb9-beb3-475f-b246-ebf184cd3823/ByanhN8s3d.lottie"
+            background="transparent" speed="1" loop autoplay class="max-w-full h-auto"></dotlottie-player>
+    </div>
+</section>
+
+
+<section class="px-4 md:px-12">
+    <div class="container mx-auto">
+        <h2 class="text-5xl font-bold mb-8">CATEGORIES</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {% for category in category %}
+            <div class="shadow p-6 rounded border-2 border-blue-700">
+                <h3 class="text-3xl font-bold py-7">{{ category.name }}</h3>
+                <p class="mt-2">{{ category.description }}</p>
+                <a href="{% url 'category' %}" class="mt-4 inline-block text-blue-500 hover:text-hover">Learn {{ category.name }}</a>
+            </div>
+            {% empty %}
+            <p class="col-span-3 text-center">No courses available.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+<section class="flex flex-col md:flex-row items-center justify-center px-6 h-[100vh] ">
+
+    <div class="md:w-1/2 md:mt-0 flex justify-center border-blue-500 md:border-r-2">
+        <dotlottie-player src="https://lottie.host/dd7d2e3a-9a4e-45e2-95a9-e57bd08c88b9/7TnBm4AXOx.lottie"
+            background="transparent" speed="1" class="max-w-full h-[400px]" loop autoplay></dotlottie-player>
+    </div>
+
+
+    <div class="md:w-1/2 md:text-center w-full flex flex-col justify-center ">
+        <h1 class="text-3xl md:text-6xl font-bold text-center">
+            Track your progress, <br> Earn coins
+        </h1>
+        <p class="text-text text-sm p-6 text-center">Earn coins by completing lessons, spend them wisely on quizzes,and watch <br> your progress grow!</p>
+    </div>
+    
+</section>
+
+<script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+<dotlottie-player src="https://lottie.host/ddff5909-92ed-4a7a-8164-b5c34ae71914/wtfms42jwq.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
+{% endblock %}

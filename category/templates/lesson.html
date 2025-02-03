@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mx-auto p-6">
+    <p class="text-sm mb-4"><a href="{% url 'category' %}">Category</a> > <a
+            href="{% url 'topic' topic.category.name %}"> {{ category.name }}</a> > {{ topic.name }}</p>
+    <h1 class="text-center md:text-7xl text-5xl py-32">Lessons in {{ topic.name }}</h1>
+    <div class="grid grid-cols-1 gap-4">
+        {% for lesson in lessons %}
+        <div class="flex justify-between p-4 border rounded">
+            <h2 class="text-lg font-semibold uppercase {% if lesson.is_completed %}line-through{% endif %}">{{ lesson.name }}</h2>
+            <div class="flex gap-4">
+                <a href="{% url 'lesson_detail' category.name topic.name lesson.name 'document' %}" class="bg-green-500 p-1 text-white rounded-md">Document</a>
+                <a href="{% url 'lesson_detail' category.name topic.name lesson.name 'video' %}" class="bg-blue-500 p-1 text-white rounded-md">Video</a>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-3xl">Lesson coming soon ...</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

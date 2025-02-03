@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h2>Coin History</h2>
+<table border="1">
+    <tr>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>Date</th>
+    </tr>
+    {% for entry in history %}
+    <tr>
+        <td>{{ entry.coin_type|title }}</td>
+        <td>{{ entry.amount }}</td>
+        <td>{{ entry.timestamp }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}

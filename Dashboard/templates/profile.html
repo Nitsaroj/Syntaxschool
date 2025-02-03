@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="flex flex-col md:flex-row ">
+	<!-- Sidebar -->
+	<div class="border-r border-Navcolor p-6 flex flex-col items-center">
+		<!-- Profile Picture -->
+		<label for="" class="w-full border-b border-Navcolor mb-10 text-center">
+			<h1 class="text-5xl font-mono first-letter:text-blue-800">DASHBOARD</h1>
+		</label>
+		<div class="w-36 h-36 mb-4">
+			<img src="{% if profile_pic %}{{ profile_pic }}{% else %}/media/profile_pics/default.png{% endif %}"
+				alt="Profile Picture" class="rounded-full w-full h-full object-cover border-2 border-amber-400">
+		</div>
+		<!-- Username and Email -->
+		<h2 class="text-lg font-bold">{{ user.username }}</h2>
+		<p class="text-xl text-sky-700">{{ user.email }}</p>
+		<p class="text-xl text-sky-700">{{ user.phone_num }}</p>
+
+		<!-- File Upload Form -->
+		<form action="{% url 'update_profile' %}" method="post" enctype="multipart/form-data"
+			class="mt-4 w-full flex flex-col items-center">
+			{% csrf_token %}
+			<input type="file" name="profile_pic"
+				class="block w-3/6 text-sm text-amber-700 border border-Navcolor p-1 rounded">
+			<button type="submit"
+				class="mt-4 px-6 py-2 bg-Navcolor font-medium rounded-lg hover:bg-blue-700">
+				Update
+			</button>
+		</form>
+
+		<!-- Logout Button -->
+		<button onclick="window.location.href='/logout/'"
+			class="mt-4 px-6 py-2 bg-Navcolor font-medium rounded-lg hover:bg-red-700">
+			Log Out
+		</button>
+	</div>
+
+	<!-- Main Content -->
+	<div class="md:w-2/3 w-full p-6 text-center md:text-start">
+		<h1 class="text-2xl font-bold">Welcome, {{ user.first_name }} {{user.last_name}}!</h1>
+		<p><strong>Total Coins:</strong> {{ total_coins }}</p>
+		<p><strong>Spend Coins:</strong> {{ spend_coins }}</p>
+		<p><strong>Reward Coins:</strong> {{ reward_coins }}</p>
+
+		<a href="{% url 'coin_history'%}">history Coin</a>
+		<p class="mt-2 text-amber-600">Update your profile picture or make changes to your profile using the sidebar.
+		</p>
+	</div>
+</div>
+{% endblock %}

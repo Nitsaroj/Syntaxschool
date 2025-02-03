@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h2>Simple HTML, CSS, and JS Code Editor</h2>
+    
+<label>HTML:</label>
+<textarea id="html_code"></textarea>
+
+<label>CSS:</label>
+<textarea id="css_code"></textarea>
+
+<label>JavaScript:</label>
+<textarea id="js_code"></textarea>
+
+<button onclick="runCode()">Run Code</button>
+
+<h3>Output:</h3>
+<iframe id="output"></iframe>
+{% endblock %}
